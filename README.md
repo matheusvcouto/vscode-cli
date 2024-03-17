@@ -1,6 +1,8 @@
 # vscode
 
-Esse projeto surgiu com a nescessidade de diferentes temas e configurações para determinados projetos utilizando o vscode.
+This project aims to streamline the swift exchange of specific themes and configurations for various projects within VSCode, providing a command-line interface (CLI) for a nimble and efficient customization experience.
+
+Este projeto visa facilitar a rápida troca de temas e configurações específicas para diversos projetos no VSCode, oferecendo uma interface de linha de comando (CLI) para uma experiência ágil e eficiente de personalização.
 
 To install dependencies:
 
