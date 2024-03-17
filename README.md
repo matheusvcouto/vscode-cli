@@ -1,4 +1,4 @@
-# vscode
+# vscode CLI
 
 This project aims to streamline the swift exchange of specific themes and configurations for various projects within VSCode, providing a command-line interface (CLI) for a nimble and efficient customization experience.
 
