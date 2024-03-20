@@ -1,7 +1,5 @@
 import { parseArgs } from "node:util";
 
-// type Comanders = 'theme' | 'init' | 'iconTheme' | 'autoSave' 
-
 const ListComands = [
   'theme', 
   'init', 
@@ -12,7 +10,7 @@ const ListComands = [
 
 type Comanders = typeof ListComands[number]
 
-async function getCommand () {
+async function getCommand() {
   const { positionals } = parseArgs({
     args: Bun.argv,
     strict: true,
@@ -30,20 +28,7 @@ async function getCommand () {
   if (result === 'sv') {
     result = 'save'
   }
-  // let result: Comanders | null = 'init'
-  
-  // if (command === 'theme') {
-  //   result = 'theme'
-  // }
-  // if (command === 'icon') {
-  //   result = 'iconTheme'
-  // }
-  // if (command === 'sv' || command === 'save') {
-  //   result = 'autoSave'
-  // }
-  // if (command === 'init') {
-  //   result = 'init'
-  // }
+
   return result
 }
 

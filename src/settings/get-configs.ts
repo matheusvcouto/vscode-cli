@@ -61,9 +61,29 @@ const newAutoSaveConfig = async () => {
  return {"files.autoSave": autoSave}
 }
 
+const getFilesExlude = async () => {
+  const filesExclude = await select({
+    message: "Please choose a iconTheme: ",
+    choices: [
+      {
+        name: 'node_modules',
+        value: 'node_modules'
+      }, 
+      {
+        name: '.venv',
+        value: '.venv'
+      }
+    ]
+  })
+  const base = '**/'
+  const file = base.concat(filesExclude)
+  return { "files.exclude": { [file]: true} }
+}
+
 export {
   getNewConfig,
   newIconTheme,
   newAutoSaveConfig,
+  getFilesExlude,
   newTheme,
 }

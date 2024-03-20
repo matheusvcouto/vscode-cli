@@ -1,4 +1,4 @@
-import { getNewConfig, newIconTheme, newTheme, newAutoSaveConfig } from '@/get-configs'
+import { getNewConfig, newIconTheme, newTheme, newAutoSaveConfig } from '@/settings/get-configs'
 import { colorThemes, iconsTheme } from './themes'
 export * from './themes'
 
@@ -27,6 +27,11 @@ const getIconTheme = async () => {
 }
 
 const getAutoSaveConfg = async () => {
+  const result = await newAutoSaveConfig()
+  return result
+}
+
+const getFilesExclude = async () => {
   const result = await newAutoSaveConfig()
   return result
 }

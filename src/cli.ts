@@ -1,6 +1,7 @@
 import { Glob, $ } from "bun"
 import { getAutoSaveConfg, getIconTheme, getSettings, getTheme } from "@/settings"
-import { getCommand, ListComands } from "@/commander"
+import { parseArgs } from "node:util";
+import { getFilesExlude } from "./settings/get-configs";
 
 await $`mkdir .vscode`.quiet() // cria a pasta se não existir
 await $`touch .vscode/settings.json`
@@ -24,6 +25,41 @@ for (const file of glob.scanSync(".vscode/")) {
     }
   }
 }
+
+const ListComands = [
+  'theme', 
+  'init', 
+  'icon', 
+  'save',
+  'exclude',
+  'sv'
+] as const
+
+type Comanders = typeof ListComands[number]
+
+async function getCommand() {
+  const { positionals } = parseArgs({
+    args: Bun.argv,
+    strict: true,
+    allowPositionals: true,
+  })
+  
+  const command = positionals[2]
+  
+  let result = ListComands.find(cmd => cmd === command) ?? null
+  
+  if (command === undefined) { 
+    result = 'init' // if none comes, it will be equal to init
+  }
+
+  if (result === 'sv') {
+    result = 'save'
+  }
+
+  return result
+}
+
+
 async function run() {
   const command = await getCommand()
 
@@ -52,7 +88,26 @@ async function run() {
     const configAutoSave = await getAutoSaveConfg()
     settings['files.autoSave'] = configAutoSave['files.autoSave']
 
+  } else if (command === 'exclude') {
+    const config = await getFilesExlude()
+    const [ fileExclude ] = Object.keys(config["files.exclude"])
+    if (settings["files.exclude"] === undefined) {
+      console.log(settings)
+      settings["files.exclude"] = {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+      }
+      settings["files.exclude"][fileExclude] = config["files.exclude"][fileExclude]
+    } else {
+      settings["files.exclude"][fileExclude] = config["files.exclude"][fileExclude]
+    }
+    
   } else {
+    // adicionar para perguntar perguntar o que deseja alterar
     const newSettigs = await getSettings() as unknown as Settings
     for (const key of Object.keys(newSettigs)) {
       settings[key] = newSettigs[key]    
