@@ -1,10 +1,7 @@
-type Themes = {
-  name: string;
-  value: string;
-  description?: string;
-}[]
+import type { Opts } from "@/cli/config"
 
-const colorThemes: Themes = [
+
+const colorThemes: Opts = [
   {
     name: "Min Dark",
     value: "Min Dark",
@@ -34,7 +31,7 @@ const colorThemes: Themes = [
 
 type ColorThemes = typeof colorThemes[number]
 
-const iconsTheme: Themes = [
+const iconsTheme: Opts = [
   {
     name: 'Material icon theme',
     value: "material-icon-theme",
@@ -49,4 +46,4 @@ const iconsTheme: Themes = [
 
 type IconsTheme = typeof colorThemes[number]
 
-export { colorThemes, iconsTheme, type Themes, type IconsTheme, type ColorThemes }
+export { colorThemes, iconsTheme, type Opts, type IconsTheme, type ColorThemes }

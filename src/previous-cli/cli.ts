@@ -1,7 +1,7 @@
 import { Glob, $ } from "bun"
 import { getAutoSaveConfg, getIconTheme, getSettings, getTheme } from "@/settings"
 import { parseArgs } from "node:util";
-import { getFilesExlude } from "./settings/get-configs";
+import { getFilesExlude } from "./get-configs";
 
 await $`mkdir .vscode`.quiet() // cria a pasta se não existir
 await $`touch .vscode/settings.json`
